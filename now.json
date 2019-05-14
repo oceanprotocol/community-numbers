@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "oceanprotocol-community",
+  "alias": "oceanprotocol-community.now.sh",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@now/node"
+    }
+  ]
+}

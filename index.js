@@ -1,0 +1,40 @@
+const ms = require('ms')
+const { logError } = require('./util/logger')
+
+const fetchGitHubRepos = require('./networks/github')
+const fetchBounties = require('./networks/bounties')
+const fetchMedium = require('./networks/medium')
+
+let cacheGithub = null
+let cacheBounties = null
+let cacheMedium = null
+
+//
+// Create the response
+//
+module.exports = async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET')
+
+    try {
+        if (!cacheGithub || Date.now() - cacheGithub.lastUpdate > ms('5m')) {
+            cacheGithub = await fetchGitHubRepos()
+        }
+
+        if (!cacheBounties || Date.now() - cacheBounties.lastUpdate > ms('5m')) {
+            cacheBounties = await fetchBounties()
+        }
+
+        if (!cacheMedium || Date.now() - cacheMedium.lastUpdate > ms('5m')) {
+            cacheMedium = await fetchMedium()
+        }
+    } catch (error) {
+        logError(error.message)
+    }
+
+    res.end(JSON.stringify({
+        github: cacheGithub,
+        bounties: cacheBounties,
+        medium: cacheMedium
+    }))
+}
