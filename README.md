@@ -21,22 +21,20 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
 
 ```json
 {
-    "data": {
-        "github": {
-            "stars": 1000,
-            "repos": 1000
-        },
-        "medium": {
-            "followers": 1000
-        },
-        "bounties": {
-            "gitcoin": 1000,
-            "bountiesNetwork": 1000,
-            "total": 1000
-        },
-        "twitter": {
-            "followers": 1000
-        }
+    "github": {
+        "stars": 1000,
+        "repos": 1000
+    },
+    "medium": {
+        "followers": 1000
+    },
+    "bounties": {
+        "gitcoin": 1000,
+        "bountiesNetwork": 1000,
+        "total": 1000
+    },
+    "twitter": {
+        "followers": 1000
     }
 }
 
