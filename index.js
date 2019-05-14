@@ -5,11 +5,13 @@ const fetchGitHubRepos = require('./networks/github')
 const fetchBounties = require('./networks/bounties')
 const fetchMedium = require('./networks/medium')
 const fetchTwitter = require('./networks/twitter')
+const fetchTelegram = require('./networks/telegram')
 
 let cacheGithub = null
 let cacheBounties = null
 let cacheMedium = null
 let cacheTwitter = null
+let cacheTelegram = null
 
 //
 // Create the response
@@ -34,6 +36,10 @@ module.exports = async (req, res) => {
         if (!cacheTwitter || Date.now() - cacheTwitter.lastUpdate > ms('5m')) {
             cacheTwitter = await fetchTwitter()
         }
+
+        if (!cacheTelegram || Date.now() - cacheTelegram.lastUpdate > ms('5m')) {
+            cacheTelegram = await fetchTelegram()
+        }
     } catch (error) {
         logError(error.message)
     }
@@ -42,6 +48,7 @@ module.exports = async (req, res) => {
         github: cacheGithub,
         bounties: cacheBounties,
         medium: cacheMedium,
-        twitter: cacheTwitter
+        twitter: cacheTwitter,
+        telegram: cacheTelegram
     }))
 }
