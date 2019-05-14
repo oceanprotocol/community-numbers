@@ -33,6 +33,9 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
             "gitcoin": 1000,
             "bountiesNetwork": 1000,
             "total": 1000
+        },
+        "twitter": {
+            "followers": 1000
         }
     }
 }

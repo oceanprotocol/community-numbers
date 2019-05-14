@@ -4,10 +4,12 @@ const { logError } = require('./util/logger')
 const fetchGitHubRepos = require('./networks/github')
 const fetchBounties = require('./networks/bounties')
 const fetchMedium = require('./networks/medium')
+const fetchTwitter = require('./networks/twitter')
 
 let cacheGithub = null
 let cacheBounties = null
 let cacheMedium = null
+let cacheTwitter = null
 
 //
 // Create the response
@@ -28,6 +30,10 @@ module.exports = async (req, res) => {
         if (!cacheMedium || Date.now() - cacheMedium.lastUpdate > ms('5m')) {
             cacheMedium = await fetchMedium()
         }
+
+        if (!cacheTwitter || Date.now() - cacheTwitter.lastUpdate > ms('5m')) {
+            cacheTwitter = await fetchTwitter()
+        }
     } catch (error) {
         logError(error.message)
     }
@@ -35,6 +41,7 @@ module.exports = async (req, res) => {
     res.end(JSON.stringify({
         github: cacheGithub,
         bounties: cacheBounties,
-        medium: cacheMedium
+        medium: cacheMedium,
+        twitter: cacheTwitter
     }))
 }
