@@ -1,5 +1,5 @@
 const ms = require('ms')
-const { logError } = require('./util/logger')
+const { logError } = require('./utils')
 
 const fetchGitHubRepos = require('./networks/github')
 const fetchBounties = require('./networks/bounties')
