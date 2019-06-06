@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const { log, logError } = require('../util/logger')
+const { log, logError } = require('../utils')
 
 const fetchTwitter = async () => {
     const url = 'https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names=oceanprotocol'

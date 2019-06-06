@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const { log, logError } = require('../util/logger')
+const { log, logError } = require('../utils')
 
 const getGitcoin = async () => {
     const response = await fetch('https://gitcoin.co/api/v0.1/bounties/?&org=oceanprotocol&is_open=true')

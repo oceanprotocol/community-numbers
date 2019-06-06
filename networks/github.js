@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const { log, logError } = require('../util/logger')
+const { log, logError, arrSum } = require('../utils')
 
 // Request options for all fetch calls
 const options = {
@@ -9,8 +9,6 @@ const options = {
         Accept: 'application/vnd.github.preview'
     }
 }
-
-const arrSum = arr => arr.reduce((a, b) => a + b, 0)
 
 //
 // Fetch all public GitHub repos

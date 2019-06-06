@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const { log, logError } = require('../util/logger')
+const { log, logError } = require('../utils')
 
 const fetchMedium = async () => {
     const url = 'https://medium.com/oceanprotocol?format=json'
