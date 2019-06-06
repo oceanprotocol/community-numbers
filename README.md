@@ -15,7 +15,7 @@
 
 Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-community.now.sh)
 
-### GET /
+### `GET /`
 
 **200**: Returns a list of network numbers as follows:
 
@@ -64,7 +64,13 @@ npm test
 
 ## Deployment
 
-Deploy to [now](https://zeit.co/now), make sure to switch to Ocean Protocol org before deploying:
+Every branch is automatically deployed to [Now](https://zeit.co/now) with their GitHub integration. A link to a deployment will appear under each Pull Request.
+
+The latest deployment of the `master` branch is automatically aliased to `oceanprotocol-community.now.sh`, configured as `alias` in [`now.json`](now.json).
+
+### Manual Deployment
+
+If needed, app can be deployed manually. Make sure to switch to Ocean Protocol org before deploying:
 
 ```bash
 # first run
@@ -80,3 +86,21 @@ now alias
 ## Authors
 
 - Matthias Kretschmann ([@kremalicious](https://github.com/kremalicious)) - [Ocean Protocol](https://oceanprotocol.com)
+
+## License
+
+```text
+Copyright 2018 Ocean Protocol Foundation Ltd.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
