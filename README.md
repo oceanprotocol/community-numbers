@@ -37,7 +37,6 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
         "followers": 1000
     }
 }
-
 ```
 
 ## Development
@@ -45,10 +44,11 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
 Install dependencies:
 
 ```bash
+npm install -g now
 npm install
 ```
 
-And run the server:
+And run the server in dev mode:
 
 ```bash
 npm start
