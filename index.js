@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET')
 
     try {
+        /* eslint-disable require-atomic-updates */
         if (!cacheGithub || Date.now() - cacheGithub.lastUpdate > ms('5m')) {
             cacheGithub = await fetchGitHubRepos()
         }
@@ -40,6 +41,7 @@ module.exports = async (req, res) => {
         if (!cacheTelegram || Date.now() - cacheTelegram.lastUpdate > ms('5m')) {
             cacheTelegram = await fetchTelegram()
         }
+        /* eslint-enable require-atomic-updates */
     } catch (error) {
         logError(error.message)
     }
