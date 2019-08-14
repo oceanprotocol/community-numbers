@@ -46,11 +46,11 @@ module.exports = async (req, res) => {
         logError(error.message)
     }
 
-    res.end(JSON.stringify({
+    res.send({
         github: cacheGithub,
         bounties: cacheBounties,
         medium: cacheMedium,
         twitter: cacheTwitter,
         telegram: cacheTelegram
-    }))
+    })
 }
