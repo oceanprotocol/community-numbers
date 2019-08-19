@@ -25,7 +25,7 @@ const fetchGitHubRepos = async () => {
 
     const json = await response.json()
 
-    let numbers = []
+    const numbers = []
 
     json.map(item => {
         if (item.stargazers_count) {
