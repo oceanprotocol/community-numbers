@@ -38,7 +38,7 @@ const fetchGitHubRepos = async () => {
     const repositories = json.length
 
     log(
-        `Re-built github cache. ` +
+        'Re-built github cache. ' +
         `Total: ${repositories} public projects with a total of ${stars} stargazers. ` +
         `Elapsed: ${new Date() - start}ms`
     )

@@ -47,7 +47,7 @@ const fetchBounties = async () => {
     const total = await getTotal()
 
     log(
-        `Re-built bounties cache. ` +
+        'Re-built bounties cache. ' +
         `Total: ${total} bounties. ` +
         `Elapsed: ${new Date() - start}ms`
     )

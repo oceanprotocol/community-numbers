@@ -15,7 +15,7 @@ const fetchTwitter = async () => {
     const followers = json[0].followers_count
 
     log(
-        `Re-built twitter cache. ` +
+        'Re-built twitter cache. ' +
         `Total: ${followers} followers. ` +
         `Elapsed: ${new Date() - start}ms`
     )
