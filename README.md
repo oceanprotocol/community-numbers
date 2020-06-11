@@ -39,6 +39,9 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
     "telegram": {
         "community": 1000,
         "news": 1000
+    },
+    "discord": {
+        "members": 1000
     }
 }
 ```

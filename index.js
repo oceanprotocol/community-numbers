@@ -6,12 +6,14 @@ const fetchBounties = require('./networks/bounties')
 const fetchMedium = require('./networks/medium')
 const fetchTwitter = require('./networks/twitter')
 const fetchTelegram = require('./networks/telegram')
+const fetchDiscord = require('./networks/discord')
 
 let cacheGithub = null
 let cacheBounties = null
 let cacheMedium = null
 let cacheTwitter = null
 let cacheTelegram = null
+let cacheDiscord = null
 
 //
 // Create the response
@@ -23,23 +25,47 @@ module.exports = async (req, res) => {
     try {
         /* eslint-disable require-atomic-updates */
         if (!cacheGithub || Date.now() - cacheGithub.lastUpdate > ms('5m')) {
-            cacheGithub = await fetchGitHubRepos()
+            try {
+                cacheGithub = await fetchGitHubRepos()
+            } catch (error) {
+                console.error(error.message)
+            }
         }
 
         if (!cacheBounties || Date.now() - cacheBounties.lastUpdate > ms('5m')) {
-            cacheBounties = await fetchBounties()
+            try {
+                cacheBounties = await fetchBounties()
+            } catch (error) {
+                console.error(error.message)
+            }
         }
 
         if (!cacheMedium || Date.now() - cacheMedium.lastUpdate > ms('5m')) {
-            cacheMedium = await fetchMedium()
+            try {
+                cacheMedium = await fetchMedium()
+            } catch (error) {
+                console.error(error.message)
+            }
         }
 
         if (!cacheTwitter || Date.now() - cacheTwitter.lastUpdate > ms('5m')) {
-            cacheTwitter = await fetchTwitter()
+            try {
+                cacheTwitter = await fetchTwitter()
+            } catch (error) {
+                console.error(error.message)
+            }
         }
 
         if (!cacheTelegram || Date.now() - cacheTelegram.lastUpdate > ms('5m')) {
-            cacheTelegram = await fetchTelegram()
+            try {
+                cacheTelegram = await fetchTelegram()
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        if (!cacheDiscord || Date.now() - cacheDiscord.lastUpdate > ms('5m')) {
+            cacheDiscord = await fetchDiscord()
         }
         /* eslint-enable require-atomic-updates */
     } catch (error) {
@@ -51,6 +77,7 @@ module.exports = async (req, res) => {
         bounties: cacheBounties,
         medium: cacheMedium,
         twitter: cacheTwitter,
-        telegram: cacheTelegram
+        telegram: cacheTelegram,
+        discord: cacheDiscord
     })
 }
