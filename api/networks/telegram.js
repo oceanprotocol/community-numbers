@@ -19,11 +19,11 @@ export default async function fetchTelegram() {
     .replace(' members', '')
     .replace(' ', '')
     .replace(' ', '')
-  const membersCommunity = parseInt(infoCommunity)
+  const community = parseInt(infoCommunity)
 
   log(
     'Re-fetched Telegram. ' +
-      `Total: ${membersCommunity} oceanprotocol_community members. ` +
+      `Total: ${community} oceanprotocol_community members. ` +
       `Elapsed: ${new Date() - start}ms`
   )
 
@@ -39,13 +39,13 @@ export default async function fetchTelegram() {
 
   let infoNews = dataNews('.tgme_page_extra').text()
   infoNews = infoNews.replace(' members', '').replace(' ', '').replace(' ', '')
-  const membersNews = parseInt(infoNews)
+  const news = parseInt(infoNews)
 
   log(
     'Re-fetched Telegram. ' +
-      `Total: ${membersCommunity} oceanprotocol members. ` +
+      `Total: ${news} oceanprotocol members. ` +
       `Elapsed: ${new Date() - start}ms`
   )
 
-  return { community: membersCommunity, news: membersNews }
+  return { community, news }
 }
