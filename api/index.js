@@ -13,6 +13,7 @@ import fetchDiscord from './networks/discord'
 export default async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET')
+  res.setHeader('Cache-Control', 'max-age=0, s-maxage=86400')
 
   let response = {}
 
