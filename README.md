@@ -29,9 +29,7 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
         "followers": 1000
     },
     "bounties": {
-        "gitcoin": 1000,
-        "bountiesNetwork": 1000,
-        "total": 1000
+        "gitcoin": 1000
     },
     "twitter": {
         "followers": 1000
@@ -51,7 +49,7 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
 Install dependencies:
 
 ```bash
-npm install -g now
+npm install -g vercel
 npm install
 ```
 
