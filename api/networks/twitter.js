@@ -1,7 +1,7 @@
-const fetch = require('node-fetch')
-const { log, logError } = require('../utils')
+import fetch from 'node-fetch'
+import { log, logError } from '../utils'
 
-const fetchTwitter = async () => {
+export default async function fetchTwitter() {
     const url = 'https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names=oceanprotocol'
     const start = Date.now()
     const response = await fetch(url)
@@ -22,5 +22,3 @@ const fetchTwitter = async () => {
 
     return { followers }
 }
-
-module.exports = fetchTwitter

@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
-const { log, logError, arrSum } = require('../utils')
+import fetch from 'node-fetch'
+import { log, logError, arrSum } from '../utils'
 
 // Request options for all fetch calls
 const options = {
@@ -13,7 +13,7 @@ const options = {
 //
 // Fetch all public GitHub repos
 //
-const fetchGitHubRepos = async () => {
+export default async function fetchGitHubRepos() {
     const url = 'https://api.github.com/orgs/oceanprotocol/repos?type=public&per_page=200'
     const start = Date.now()
     const response = await fetch(url, options)
@@ -45,5 +45,3 @@ const fetchGitHubRepos = async () => {
 
     return { stars, repositories }
 }
-
-module.exports = fetchGitHubRepos

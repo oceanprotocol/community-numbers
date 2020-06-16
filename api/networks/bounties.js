@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
-const { log, logError } = require('../utils')
+import fetch from 'node-fetch'
+import { log, logError } from '../utils'
 
 const getGitcoin = async () => {
     const response = await fetch('https://gitcoin.co/api/v0.1/bounties/?&org=oceanprotocol')
@@ -15,7 +15,7 @@ const getGitcoin = async () => {
     return { total: total.length, open: open.length }
 }
 
-const fetchBounties = async () => {
+export default async function fetchBounties() {
     const start = Date.now()
     const { total, open } = await getGitcoin()
 
@@ -27,5 +27,3 @@ const fetchBounties = async () => {
 
     return { open, total }
 }
-
-module.exports = fetchBounties

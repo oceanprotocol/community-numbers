@@ -1,7 +1,7 @@
-const fetch = require('node-fetch')
-const { log, logError } = require('../utils')
+import fetch from 'node-fetch'
+import { log, logError } from '../utils'
 
-const fetchMedium = async () => {
+export default async function fetchMedium() {
     const url = 'https://medium.com/oceanprotocol?format=json'
     const start = Date.now()
     const response = await fetch(url)
@@ -25,5 +25,3 @@ const fetchMedium = async () => {
 
     return { followers }
 }
-
-module.exports = fetchMedium

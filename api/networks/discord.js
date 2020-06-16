@@ -12,9 +12,9 @@ export default async function fetchDiscord() {
     const members = await page.evaluate(() => {
         // get the activity count element
         const membersElement = document.querySelector('[class*="activityCount"] > div:last-child span')
-        console.log(membersElement)
-        const number = membersElement.innerText.replace(' Members', '')
-        return Number(number)
+        const membersElementText = membersElement.innerText
+        const number = membersElementText.replace(' Members', '')
+        return number
     })
 
     log(
@@ -23,5 +23,5 @@ export default async function fetchDiscord() {
         `Elapsed: ${new Date() - start}ms`
     )
 
-    return { members }
+    return { members: Number(members) }
 }

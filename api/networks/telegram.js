@@ -1,8 +1,8 @@
-const fetch = require('node-fetch')
-const cheerio = require('cheerio')
-const { log, logError } = require('../utils')
+import fetch from 'node-fetch'
+import { load } from 'cheerio'
+import { log, logError } from '../utils'
 
-const fetchTelegram = async () => {
+export default async function fetchTelegram() {
     const urlCommunity = 'https://t.me/oceanprotocol_community/?pagehidden=false'
     const start = Date.now()
     const responseCommunity = await fetch(urlCommunity)
@@ -12,7 +12,7 @@ const fetchTelegram = async () => {
         return null
     }
     const bodyCommunity = await responseCommunity.text()
-    const dataCommunity = await cheerio.load(bodyCommunity, { normalizeWhitespace: true })
+    const dataCommunity = await load(bodyCommunity, { normalizeWhitespace: true })
 
     let infoCommunity = dataCommunity('.tgme_page_extra').text()
     infoCommunity = infoCommunity.replace(' members', '').replace(' ', '').replace(' ', '')
@@ -32,7 +32,7 @@ const fetchTelegram = async () => {
         return null
     }
     const bodyNews = await responseNews.text()
-    const dataNews = await cheerio.load(bodyNews, { normalizeWhitespace: true })
+    const dataNews = await load(bodyNews, { normalizeWhitespace: true })
 
     let infoNews = dataNews('.tgme_page_extra').text()
     infoNews = infoNews.replace(' members', '').replace(' ', '').replace(' ', '')
@@ -46,5 +46,3 @@ const fetchTelegram = async () => {
 
     return { community: membersCommunity, news: membersNews }
 }
-
-module.exports = fetchTelegram

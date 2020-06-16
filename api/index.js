@@ -1,11 +1,11 @@
-import { logError } from '../utils'
+import { logError } from './utils'
 
-import fetchGitHubRepos from '../networks/github'
-import fetchBounties from '../networks/bounties'
-import fetchMedium from '../networks/medium'
-import fetchTwitter from '../networks/twitter'
-import fetchTelegram from '../networks/telegram'
-import fetchDiscord from '../networks/discord'
+import fetchGitHubRepos from './networks/github'
+import fetchBounties from './networks/bounties'
+import fetchMedium from './networks/medium'
+import fetchTwitter from './networks/twitter'
+import fetchTelegram from './networks/telegram'
+import fetchDiscord from './networks/discord'
 
 //
 // Create the response
@@ -55,6 +55,8 @@ export default async (req, res) => {
         const discord = await fetchDiscord()
         response = { ...response, discord }
     } catch (error) {
+        // fake fallback response cause puppeteer fails a lot
+        response = { ...response, discord: { members: '240' } }
         logError(error.message)
     }
 
