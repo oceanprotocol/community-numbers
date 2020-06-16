@@ -19,7 +19,7 @@ const fetchTelegram = async () => {
     const membersCommunity = parseInt(infoCommunity)
 
     log(
-        'Re-built telegram cache. ' +
+        'Re-fetched Telegram. ' +
         `Total: ${membersCommunity} oceanprotocol_community members. ` +
         `Elapsed: ${new Date() - start}ms`
     )
@@ -39,8 +39,8 @@ const fetchTelegram = async () => {
     const membersNews = parseInt(infoNews)
 
     log(
-        'Re-built telegram cache. ' +
-        `Total: ${membersCommunity} oceanprotocol_community members. ` +
+        'Re-fetched Telegram. ' +
+        `Total: ${membersCommunity} oceanprotocol members. ` +
         `Elapsed: ${new Date() - start}ms`
     )
 

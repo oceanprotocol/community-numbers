@@ -1,21 +1,27 @@
-const { log, logError } = require('../utils')
-const Discord = require('discord.js')
-const client = new Discord.Client()
+import puppeteer from 'puppeteer'
+import { log } from '../utils'
 
-const fetchDiscord = async () => {
+export default async function fetchDiscord() {
     const url = 'https://discord.com/invite/TnXjkR5'
     const start = Date.now()
 
-    const myGuild = client.guilds.cache.get('703315963583528991')
-    const members = myGuild.members.cache.filter(member => !member.user.bot).size
+    const browser = await puppeteer.launch({ headless: true })
+    const page = await browser.newPage()
+    await page.goto(url)
+
+    const members = await page.evaluate(() => {
+        // get the activity count element
+        const membersElement = document.querySelector('[class*="activityCount"] > div:last-child span')
+        console.log(membersElement)
+        const number = membersElement.innerText.replace(' Members', '')
+        return Number(number)
+    })
 
     log(
-        'Re-built Discord cache. ' +
+        'Re-fetched Discord. ' +
         `Total: ${members} members. ` +
         `Elapsed: ${new Date() - start}ms`
     )
 
     return { members }
 }
-
-module.exports = fetchDiscord
