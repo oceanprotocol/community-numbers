@@ -1,21 +1,24 @@
 {
   "name": "@oceanprotocol/community-numbers",
-  "private": true,
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "now dev",
+    "start": "vercel dev",
     "test": "eslint --ignore-path .gitignore --ext .js,.jsx ."
   },
   "dependencies": {
-    "chalk": "4.1.0",
+    "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
-    "ms": "^2.1.1",
-    "node-fetch": "2.6.0"
+    "chrome-aws-lambda": "^3.1.1",
+    "chrome-finder": "^1.0.7",
+    "node-fetch": "^2.6.0",
+    "puppeteer": "^4.0.0",
+    "puppeteer-core": "^4.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.0.0",
+    "eslint": "^7.2.0",
     "eslint-config-oceanprotocol": "^1.5.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-node": "^11.1.0"
   }
 }
