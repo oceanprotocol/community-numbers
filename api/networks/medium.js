@@ -2,26 +2,26 @@ import fetch from 'node-fetch'
 import { log, logError } from '../utils'
 
 export default async function fetchMedium() {
-    const url = 'https://medium.com/oceanprotocol?format=json'
-    const start = Date.now()
-    const response = await fetch(url)
+  const url = 'https://medium.com/oceanprotocol?format=json'
+  const start = Date.now()
+  const response = await fetch(url)
 
-    if (response.status !== 200) {
-        logError(`Non-200 response code from Medium: ${response.status}`)
-        return null
-    }
+  if (response.status !== 200) {
+    logError(`Non-200 response code from Medium: ${response.status}`)
+    return null
+  }
 
-    const responseText = await response.text()
-    const json = await JSON.parse(responseText.replace('])}while(1);</x>', ''))
-    const { collection } = json.payload
+  const responseText = await response.text()
+  const json = await JSON.parse(responseText.replace('])}while(1);</x>', ''))
+  const { collection } = json.payload
 
-    const followers = collection.metadata.followerCount
+  const followers = collection.metadata.followerCount
 
-    log(
-        'Re-fetched Medium. ' +
-        `Total: ${followers} followers. ` +
-        `Elapsed: ${new Date() - start}ms`
-    )
+  log(
+    'Re-fetched Medium. ' +
+      `Total: ${followers} followers. ` +
+      `Elapsed: ${new Date() - start}ms`
+  )
 
-    return { followers }
+  return { followers }
 }
