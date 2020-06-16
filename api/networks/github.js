@@ -39,7 +39,7 @@ export default async function fetchGitHubRepos() {
   const repositories = json.length
 
   log(
-    'Re-fetched GitHub. ' +
+    '✓ GitHub. ' +
       `Total: ${repositories} public projects with a total of ${stars} stargazers. ` +
       `Elapsed: ${new Date() - start}ms`
   )

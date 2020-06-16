@@ -22,7 +22,7 @@ export default async function fetchBounties() {
   const { total, open } = await getGitcoin()
 
   log(
-    'Re-fetched bounties. ' +
+    '✓ bounties. ' +
       `Total: ${total} bounties. Open: ${open} bounties. ` +
       `Elapsed: ${new Date() - start}ms`
   )

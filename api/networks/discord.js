@@ -1,16 +1,25 @@
 import chrome from 'chrome-aws-lambda'
-import puppeteer from 'puppeteer-core'
 import { log } from '../utils'
+
+const isDev = process.env.VERCEL_URL === undefined
+const puppeteer = isDev ? require('puppeteer') : require('puppeteer-core')
 
 export default async function fetchDiscord() {
   const url = 'https://discord.com/invite/TnXjkR5'
   const start = Date.now()
 
-  const browser = await puppeteer.launch({
-    args: chrome.args,
-    executablePath: await chrome.executablePath,
-    headless: chrome.headless
-  })
+  const config = {
+    ignoreHTTPSErrors: true,
+    ...(isDev
+      ? { headless: true }
+      : {
+          args: chrome.args,
+          executablePath: await chrome.executablePath,
+          headless: chrome.headless
+        })
+  }
+
+  const browser = await puppeteer.launch(config)
   const page = await browser.newPage()
   await page.goto(url)
 
@@ -25,7 +34,7 @@ export default async function fetchDiscord() {
   })
 
   log(
-    'Re-fetched Discord. ' +
+    '✓ Discord. ' +
       `Total: ${members} members. ` +
       `Elapsed: ${new Date() - start}ms`
   )

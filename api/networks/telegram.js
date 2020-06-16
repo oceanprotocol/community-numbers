@@ -22,7 +22,7 @@ export default async function fetchTelegram() {
   const community = parseInt(infoCommunity)
 
   log(
-    'Re-fetched Telegram. ' +
+    '✓ Telegram. ' +
       `Total: ${community} oceanprotocol_community members. ` +
       `Elapsed: ${new Date() - start}ms`
   )
@@ -42,7 +42,7 @@ export default async function fetchTelegram() {
   const news = parseInt(infoNews)
 
   log(
-    'Re-fetched Telegram. ' +
+    '✓ Telegram. ' +
       `Total: ${news} oceanprotocol members. ` +
       `Elapsed: ${new Date() - start}ms`
   )

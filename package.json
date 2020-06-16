@@ -10,6 +10,7 @@
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
     "chrome-aws-lambda": "^3.1.1",
+    "chrome-finder": "^1.0.7",
     "node-fetch": "^2.6.0",
     "puppeteer": "^4.0.0",
     "puppeteer-core": "^4.0.0"

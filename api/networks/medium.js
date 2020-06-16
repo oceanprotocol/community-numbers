@@ -18,7 +18,7 @@ export default async function fetchMedium() {
   const followers = collection.metadata.followerCount
 
   log(
-    'Re-fetched Medium. ' +
+    '✓ Medium. ' +
       `Total: ${followers} followers. ` +
       `Elapsed: ${new Date() - start}ms`
   )

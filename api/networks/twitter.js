@@ -16,7 +16,7 @@ export default async function fetchTwitter() {
   const followers = json[0].followers_count
 
   log(
-    'Re-fetched Twitter. ' +
+    '✓ Twitter. ' +
       `Total: ${followers} followers. ` +
       `Elapsed: ${new Date() - start}ms`
   )
