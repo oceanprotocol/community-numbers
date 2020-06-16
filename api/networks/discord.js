@@ -1,37 +1,20 @@
-import chrome from 'chrome-aws-lambda'
+import { load } from 'cheerio'
 import { log } from '../utils'
-
-const isDev = process.env.VERCEL_URL === undefined
-const puppeteer = isDev ? require('puppeteer') : require('puppeteer-core')
+import fetch from 'node-fetch'
 
 export default async function fetchDiscord() {
   const url = 'https://discord.com/invite/TnXjkR5'
   const start = Date.now()
 
-  const config = {
-    ignoreHTTPSErrors: true,
-    ...(isDev
-      ? { headless: true }
-      : {
-          args: chrome.args,
-          executablePath: await chrome.executablePath,
-          headless: chrome.headless
-        })
-  }
+  const response = await fetch(url)
+  const body = await response.text()
+  const data = await load(body, { normalizeWhitespace: true })
 
-  const browser = await puppeteer.launch(config)
-  const page = await browser.newPage()
-  await page.goto(url)
-
-  const members = await page.evaluate(() => {
-    // get the activity count element
-    const membersElement = document.querySelector(
-      '[class*="activityCount"] > div:last-child span'
-    )
-    const membersElementText = membersElement.innerText
-    const number = membersElementText.replace(' Members', '')
-    return parseInt(number)
-  })
+  // extract members count from meta description
+  const metaDescription = data('meta[name="description"]').attr('content')
+  const regex = /\d+/ // one or more digits
+  const number = metaDescription.match(regex)
+  const members = parseInt(number[0])
 
   log(
     '✓ Discord. ' +
