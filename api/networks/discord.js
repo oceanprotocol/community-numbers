@@ -30,7 +30,7 @@ export default async function fetchDiscord() {
     )
     const membersElementText = membersElement.innerText
     const number = membersElementText.replace(' Members', '')
-    return number
+    return parseInt(number)
   })
 
   log(
@@ -39,5 +39,5 @@ export default async function fetchDiscord() {
       `Elapsed: ${new Date() - start}ms`
   )
 
-  return { members: Number(members) }
+  return { members }
 }
