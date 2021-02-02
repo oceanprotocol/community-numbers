@@ -23,7 +23,8 @@ Endpoint: [`https://oceanprotocol-community.now.sh`](https://oceanprotocol-commu
 {
   "github": {
     "stars": 1000,
-    "repos": 1000
+    "repos": 1000,
+    "contributors": 1000
   },
   "medium": {
     "followers": 1000

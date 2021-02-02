@@ -24,16 +24,31 @@ export default async function fetchGitHubRepos() {
     return null
   }
 
-  const json = await response.json()
-  const numbers = json.map((item) => item.stargazers_count)
-  const stars = arrSum(numbers)
-  const repositories = json.length
+  const jsonRepos = await response.json()
+
+  const starsArray = []
+  const contribArray = []
+
+  jsonRepos.forEach(async (item) => {
+    starsArray.push(item.stargazers_count)
+
+    const responseContrib = await fetch(
+      `https://api.github.com/orgs/oceanprotocol/${item.name}/stats/contributors`,
+      options
+    )
+    const jsonContrib = await responseContrib.json()
+    contribArray.push(jsonContrib.total)
+  })
+
+  const stars = arrSum(starsArray)
+  const repositories = jsonRepos.length
+  const contributors = arrSum(contribArray)
 
   log(
     '✓ GitHub. ' +
-      `Total: ${repositories} public projects with a total of ${stars} stargazers. ` +
+      `Total: ${repositories} public projects with a total of ${stars} stargazers & ${contributors} contributors. ` +
       `Elapsed: ${new Date() - start}ms`
   )
 
-  return { stars, repositories }
+  return { stars, repositories, contributors }
 }
