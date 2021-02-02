@@ -6,8 +6,26 @@ const options = {
   headers: {
     // For getting topics, see note on https://developer.github.com/v3/search/
     // Accept: 'application/vnd.github.mercy-preview+json'
-    Accept: 'application/vnd.github.preview'
+    Accept: 'application/vnd.github.preview',
+    Authorization: `token ${process.env.GITHUB_TOKEN}`
   }
+}
+
+function getContributors(contributors) {
+  const totalArray = contributors
+    // filter out duplicate contribution objects based on author.login
+    .reduce((accumalator, current) => {
+      if (
+        !accumalator.some((item) => item.author.login === current.author.login)
+      ) {
+        accumalator.push(current)
+      }
+      return accumalator
+    }, [])
+    .map((item) => item.total)
+
+  console.log(totalArray)
+  return arrSum(totalArray)
 }
 
 //
@@ -15,7 +33,7 @@ const options = {
 //
 export default async function fetchGitHubRepos() {
   const url =
-    'https://api.github.com/orgs/oceanprotocol/repos?type=public&per_page=200'
+    'https://api.github.com/orgs/oceanprotocol/repos?type=public&per_page=100'
   const start = Date.now()
   const response = await fetch(url, options)
 
@@ -25,24 +43,28 @@ export default async function fetchGitHubRepos() {
   }
 
   const jsonRepos = await response.json()
+  // filter out forks from public repos
+  const jsonReposCleaned = jsonRepos.filter((repo) => repo.fork === false)
 
   const starsArray = []
   const contribArray = []
 
-  jsonRepos.forEach(async (item) => {
+  for (let index = 0; index < jsonReposCleaned.length; index++) {
+    const item = jsonReposCleaned[index]
+
     starsArray.push(item.stargazers_count)
 
     const responseContrib = await fetch(
-      `https://api.github.com/orgs/oceanprotocol/${item.name}/stats/contributors`,
+      `https://api.github.com/repos/oceanprotocol/${item.name}/stats/contributors`,
       options
     )
     const jsonContrib = await responseContrib.json()
-    contribArray.push(jsonContrib.total)
-  })
+    jsonContrib && contribArray.push(jsonContrib[0])
+  }
 
   const stars = arrSum(starsArray)
-  const repositories = jsonRepos.length
-  const contributors = arrSum(contribArray)
+  const repositories = jsonReposCleaned.length
+  const contributors = getContributors(contribArray)
 
   log(
     '✓ GitHub. ' +
