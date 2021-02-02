@@ -12,20 +12,14 @@ const options = {
 }
 
 function getContributors(contributors) {
-  const totalArray = contributors
-    // filter out duplicate contribution objects based on author.login
-    .reduce((accumalator, current) => {
-      if (
-        !accumalator.some((item) => item.author.login === current.author.login)
-      ) {
-        accumalator.push(current)
-      }
-      return accumalator
-    }, [])
-    .map((item) => item.total)
+  const filtered = contributors
+    // filter out duplicate contributions based on author.login
+    .filter(
+      (v, i, a) => a.findIndex((t) => t.author.login === v.author.login) === i
+    )
+    .map((item) => item)
 
-  console.log(totalArray)
-  return arrSum(totalArray)
+  return filtered.length
 }
 
 //
