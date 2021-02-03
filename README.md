@@ -60,6 +60,12 @@ And run the server in dev mode:
 npm start
 ```
 
+Then either open up `https://localhost:3000` in a browser or do in another Terminal:
+
+```
+curl https://localhost:3000
+```
+
 ## Test
 
 Run the tests:
