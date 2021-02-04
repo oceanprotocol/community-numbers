@@ -12,9 +12,9 @@ export default async function fetchDiscord() {
 
   // extract members count from meta description
   const metaDescription = data('meta[name="description"]').attr('content')
-  const regex = /\d+[,]\d+/ // one or more digits
+  const regex = /\d+[,]\d+/ // one or more digits separated by comma
   const number = metaDescription.match(regex)
-  const membersNumber = number[0].replace(/,/,'')
+  const membersNumber = number[0].replace(/,/,'') // eliminate comma from number
   const members = parseInt(membersNumber)
 
   log(
