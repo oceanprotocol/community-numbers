@@ -4,9 +4,8 @@
 
 > Microservice to cache and expose community numbers for use throughout [oceanprotocol.com](https://oceanprotocol.com).
 
-[![Build Status](https://travis-ci.com/oceanprotocol/community-numbers.svg?branch=master)](https://travis-ci.com/oceanprotocol/community-numbers)
+[![Build Status](https://travis-ci.com/oceanprotocol/community-numbers.svg?branch=main)](https://travis-ci.com/oceanprotocol/community-numbers)
 [![js oceanprotocol](https://img.shields.io/badge/js-oceanprotocol-7b1173.svg)](https://github.com/oceanprotocol/eslint-config-oceanprotocol)
-[![Greenkeeper badge](https://badges.greenkeeper.io/oceanprotocol/community-numbers.svg)](https://greenkeeper.io/)
 <img src="http://forthebadge.com/images/badges/powered-by-electricity.svg" height="20"/>
 <img src="http://forthebadge.com/images/badges/as-seen-on-tv.svg" height="20"/>
 <img src="http://forthebadge.com/images/badges/uses-badges.svg" height="20"/>
@@ -60,10 +59,10 @@ And run the server in dev mode:
 npm start
 ```
 
-Then either open up `https://localhost:3000` in a browser or do in another Terminal:
+Then either open up `http://localhost:3000` in a browser or do in another Terminal:
 
 ```
-curl https://localhost:3000
+curl http://localhost:3000
 ```
 
 ## Test
@@ -76,9 +75,9 @@ npm test
 
 ## Deployment
 
-Every branch is automatically deployed to [Now](https://zeit.co/now) with their GitHub integration. A link to a deployment will appear under each Pull Request.
+Every branch is automatically deployed to [Vercel](https://vercel.com) with their GitHub integration. A link to a deployment will appear under each Pull Request.
 
-The latest deployment of the `master` branch is automatically aliased to `oceanprotocol-community.now.sh`, configured as `alias` in [`now.json`](now.json).
+The latest deployment of the `main` branch is automatically aliased to `oceanprotocol-community.now.sh`.
 
 ### Manual Deployment
 
@@ -86,18 +85,14 @@ If needed, app can be deployed manually. Make sure to switch to Ocean Protocol o
 
 ```bash
 # first run
-now login
-now switch
+vercel login
+vercel switch
 
 # deploy
-now
+vercel
 # switch alias to new deployment
-now alias
+vercel alias
 ```
-
-## Authors
-
-- Matthias Kretschmann ([@kremalicious](https://github.com/kremalicious)) - [Ocean Protocol](https://oceanprotocol.com)
 
 ## License
 
