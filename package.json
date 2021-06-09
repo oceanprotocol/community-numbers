@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.1",
-    "cheerio": "^1.0.0-rc.9",
+    "cheerio": "^1.0.0-rc.10",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
