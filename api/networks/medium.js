@@ -11,7 +11,7 @@ export default async function fetchMedium() {
     return null
   }
 
-  const responseText = await response.data
+  const responseText = response.data
   const json = await JSON.parse(responseText.replace('])}while(1);</x>', ''))
   const { collection } = json.payload
 

@@ -12,7 +12,7 @@ export default async function fetchTwitter() {
     return null
   }
 
-  const json = await response.data
+  const json = response.data
   const followers = json[0].followers_count
 
   log(

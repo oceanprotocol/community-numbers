@@ -11,7 +11,7 @@ const getGitcoin = async () => {
     return null
   }
 
-  const total = await response.data
+  const total = response.data
   const open = total.filter((item) => item.is_open === true)
 
   return { total: total.length, open: open.length }

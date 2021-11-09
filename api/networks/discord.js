@@ -7,7 +7,7 @@ export default async function fetchDiscord() {
   const start = Date.now()
 
   const response = await axios.get(url)
-  const body = await response.data
+  const body = response.data
   const data = await load(body, { normalizeWhitespace: true })
 
   // extract members count from meta description

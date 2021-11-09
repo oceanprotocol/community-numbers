@@ -24,7 +24,7 @@ export default async function fetchGitHubRepos() {
     return null
   }
 
-  const json = await response.data
+  const json = response.data
   const numbers = json.map((item) => item.stargazers_count)
   const stars = arrSum(numbers)
   const repositories = json.length
