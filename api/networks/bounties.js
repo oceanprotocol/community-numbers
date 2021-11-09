@@ -1,8 +1,8 @@
-import fetch from 'node-fetch'
+import axios from 'axios'
 import { log, logError } from '../utils'
 
 const getGitcoin = async () => {
-  const response = await fetch(
+  const response = await axios.get(
     'https://gitcoin.co/api/v0.1/bounties/?&org=oceanprotocol'
   )
 
@@ -11,7 +11,7 @@ const getGitcoin = async () => {
     return null
   }
 
-  const total = await response.json()
+  const total = response.data
   const open = total.filter((item) => item.is_open === true)
 
   return { total: total.length, open: open.length }

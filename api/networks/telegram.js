@@ -1,17 +1,17 @@
-import fetch from 'node-fetch'
+import axios from 'axios'
 import { load } from 'cheerio'
 import { log, logError } from '../utils'
 
 export default async function fetchTelegram() {
   const urlCommunity = 'https://t.me/oceanprotocol_community/?pagehidden=false'
   const start = Date.now()
-  const responseCommunity = await fetch(urlCommunity)
+  const responseCommunity = await axios.get(urlCommunity)
 
   if (responseCommunity.status !== 200) {
     logError(`Non-200 response code from Telegram: ${responseCommunity.status}`)
     return null
   }
-  const bodyCommunity = await responseCommunity.text()
+  const bodyCommunity = await responseCommunity.data
   const dataCommunity = await load(bodyCommunity, { normalizeWhitespace: true })
 
   let infoCommunity = dataCommunity('.tgme_page_extra').text()
@@ -28,13 +28,13 @@ export default async function fetchTelegram() {
   )
 
   const urlNews = 'https://t.me/oceanprotocol/?pagehidden=false'
-  const responseNews = await fetch(urlNews)
+  const responseNews = await axios.get(urlNews)
 
   if (responseNews.status !== 200) {
     logError(`Non-200 response code from Telegram: ${responseNews.status}`)
     return null
   }
-  const bodyNews = await responseNews.text()
+  const bodyNews = await responseNews.data
   const dataNews = await load(bodyNews, { normalizeWhitespace: true })
 
   let infoNews = dataNews('.tgme_page_extra').text()
