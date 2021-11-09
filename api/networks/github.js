@@ -1,4 +1,4 @@
-import fetch from 'node-fetch'
+import axios from 'axios'
 import { log, logError, arrSum } from '../utils'
 
 // Request options for all fetch calls
@@ -17,14 +17,14 @@ export default async function fetchGitHubRepos() {
   const url =
     'https://api.github.com/orgs/oceanprotocol/repos?type=public&per_page=200'
   const start = Date.now()
-  const response = await fetch(url, options)
+  const response = await axios.get(url, options)
 
   if (response.status !== 200) {
     logError(`Non-200 response code from GitHub: ${response.status}`)
     return null
   }
 
-  const json = await response.json()
+  const json = await response.data
   const numbers = json.map((item) => item.stargazers_count)
   const stars = arrSum(numbers)
   const repositories = json.length

@@ -1,13 +1,13 @@
 import { load } from 'cheerio'
 import { log } from '../utils'
-import fetch from 'node-fetch'
+import axios from 'axios'
 
 export default async function fetchDiscord() {
   const url = 'https://discord.com/invite/TnXjkR5'
   const start = Date.now()
 
-  const response = await fetch(url)
-  const body = await response.text()
+  const response = await axios.get(url)
+  const body = await response.data
   const data = await load(body, { normalizeWhitespace: true })
 
   // extract members count from meta description
