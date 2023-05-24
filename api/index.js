@@ -38,12 +38,12 @@ export default async (req, res) => {
     logError(error.message)
   }
 
-  /* try {
+  try {
     const twitter = await fetchTwitter()
-    response = { ...response, twitter }
+    if (twitter) response = { ...response, twitter }
   } catch (error) {
     logError(error.message)
-  } */
+  }
 
   try {
     const telegram = await fetchTelegram()

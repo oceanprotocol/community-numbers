@@ -1,19 +1,50 @@
 import axios from 'axios'
-import { log, logError } from '../utils'
+import fs from 'fs'
+import { log, logError, Oauth1Helper } from '../utils'
+import jsonDb from '../../jsonDb.json'
 
 export default async function fetchTwitter() {
-  const url =
-    'https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names=oceanprotocol'
+  const url = 'https://api.twitter.com/2/users/me?user.fields=public_metrics'
   const start = Date.now()
-  const response = await axios.get(url)
+
+  let followers = 0
+
+  const { twitter } = jsonDb
+
+  const currentTimestamp = Math.floor(Date.now() / 1000)
+  const oneDay = 60 * 60 * 24
+  const compareDatesBoolean = currentTimestamp - twitter.lastFetch > oneDay
+  if (!compareDatesBoolean) return { followers: twitter.followers }
+
+  const request = {
+    url,
+    method: 'GET'
+  }
+
+  const authHeader = await Oauth1Helper.getAuthHeaderForRequest(request)
+  const response = await axios.get(url, { headers: authHeader })
 
   if (response.status !== 200) {
     logError(`Non-200 response code from Twitter: ${response.status}`)
     return null
   }
 
-  const json = response.data
-  const followers = json[0].followers_count
+  if (response.data.data.public_metrics.followers_count === undefined)
+    return null
+
+  followers = response.data.data.public_metrics.followers_count
+
+  var stream = fs.createWriteStream('jsonDb.json')
+  const saveData = {
+    twitter: {
+      followers,
+      lastFetch: currentTimestamp
+    }
+  }
+  stream.once('open', function (fd) {
+    stream.write(JSON.stringify(saveData))
+    stream.end()
+  })
 
   log(
     '✓ Twitter. ' +
